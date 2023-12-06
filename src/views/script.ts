@@ -89,7 +89,7 @@ async function main() {
         },
         avaliacaoGrupo: {
           connect: {
-            nome: "Doug"
+            nome: "Cleison"
           }
         },
         nota: 0.0,
@@ -111,7 +111,7 @@ async function main() {
           },
           avaliacaoGrupo: {
             connect: {
-              nome: "Rids"
+              nome: "Hugo"
             }
           },
           nota: 10.0,
