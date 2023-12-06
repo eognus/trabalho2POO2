@@ -3,6 +3,6 @@ import MainController from "../controllers/maincontroller";
 
 const MainRouter = Router();
 
-MainRouter.get('/home', MainController.renderMainPage);
+MainRouter.get('/', MainController.renderMainPage);
 
 export default MainRouter;
