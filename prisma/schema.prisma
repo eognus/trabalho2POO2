@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Alunos {
+  matricula  Int         @id @unique 
+  nome       String
+  avaliacoes Avaliacao[]
+  grupo      Grupos[]
+}
+
+model Professor {
+  idUvv      Int         @id @unique
+  nome       String
+  avaliacoes Avaliacao[]
+}
+
+model Estande {
+  numeroEstande Int        @id @unique
+  dataHora      DateTime   @default(now())
+  avaliacao     Avaliacao?
+  grupo         Grupos[]
+}
+
+model Grupos {
+  nomeGrupo String    @id
+  numEstd   Int
+  alunos    Alunos[]
+  estande   Estande []
+}
+
+model Avaliacao {
+  numeroAvaliacao      Int      @id @default(autoincrement())
+  nota                 Float
+  comentario           String
+
+  professorIdUvv       Int?
+  estandeNumeroEstande Int @unique
+  matriculaAlunos      Int?
+
+  professor Professor?   @relation(fields: [professorIdUvv], references: [idUvv])
+  estande   Estande  @relation(fields: [estandeNumeroEstande], references: [numeroEstande])
+  aluno     Alunos?      @relation(fields: [matriculaAlunos], references: [matricula])
+
+  @@index([professorIdUvv], name: "idx_professorIdUvv")
+  @@index([estandeNumeroEstande], name: "idx_estandeNumeroEstande")
+  @@index([matriculaAlunos], name: "idx_matriculaAlunos")
+}
+
+
+ 
